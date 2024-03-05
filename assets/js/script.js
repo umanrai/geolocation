@@ -10,3 +10,18 @@ document.querySelector('#getLocation').addEventListener('click', () => {
 
     navigator.geolocation.getCurrentPosition(success);
 });
+
+
+function initMap() {
+    const options = {
+        zoom: 16,
+        center: { lat: 27.676310 , lng: 85.398966 }
+    }
+
+    let map = new google.maps.Map(
+        document.getElementById('map'),
+        options
+    )
+}
+
+initMap();
