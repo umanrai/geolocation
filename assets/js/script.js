@@ -14,10 +14,28 @@ document.querySelector('#getLocation').addEventListener('click', () => {
 
 let map;
 
+// Array of markers
+let markers = [
+    {
+        coordinates: { lat: 27.675342, lng: 85.397440 },
+        iconImage: 'https://img.icons8.com/fluent/48/000000/marker-storm.png',
+        content: '<h4>Bhat-Bhateni</h4>'
+    },
+    {
+        coordinates: { lat: 27.690167, lng: 85.356244 },
+        iconImage: 'https://img.icons8.com/fluent/48/000000/marker-storm.png',
+        content: '<h4>Runway</h4>'
+    },
+    {
+        coordinates: { lat: 27.701945, lng: 85.376121 },
+        content: '<h4>Raut-Ghar</h4>'
+    }
+]
+
 function initMap() {
     const options = {
         zoom: 16,
-        center: {lat: 27.686461, lng: 85.360379},
+        center: { lat: 27.686461, lng: 85.360379 },
     }
 
     map = new google.maps.Map(
@@ -26,16 +44,59 @@ function initMap() {
     )
 
     let marker = new google.maps.Marker({
-        position: {lat: 27.676214, lng: 85.398917},
-        map:map,
-        icon: 'https://img.icons8.com/fluent/48/000000/marker-storm.png'
+        position: { lat: 27.676258, lng: 85.398997 },
+        map: map
     })
 
-    let marker2 = new google.maps.Marker({
-        position: {lat: 27.676260, lng: 85.398964},
-        map:map,
-        icon: 'https://img.icons8.com/fluent/48/000000/marker-storm.png'
+    for (let i = 0; i < markers.length; i++) {
+        addMarker(markers[i])
+    }
+
+    //Listen to map click
+    google.maps.event.addListener(map, 'click', function (event) {
+        addMarker({ coordinates: event.latLng })
     })
+
+    // addMarker(
+    //     {
+    //         coordinates: {lat: 27.675342, lng: 85.397440},
+    //         iconImage: 'https://img.icons8.com/fluent/48/000000/marker-storm.png',
+    //         content: '<h4>Bhat-Bhateni</h4>'
+    //     }
+    // )
+
+    // addMarker(
+    //     {
+    //         coordinates: {lat: 27.690167, lng: 85.356244},
+    //         iconImage: 'https://img.icons8.com/fluent/48/000000/marker-storm.png',
+    //         content: '<h4>Runway</h4>'
+    //     }
+    // )
+
 }
 
-initMap();
+function addMarker(prop) {
+    let marker = new google.maps.Marker({
+        position: prop.coordinates,
+        map: map
+        // icon: prop.iconImage
+    });
+
+    //Check if there is iconImage, if yes then provide iconImage Or provide default icon
+    if (prop.iconImage) {
+        marker.setIcon(prop.iconImage)
+    }
+
+    if (prop.content) {
+        let informaton = new google.maps.InfoWindow({
+            content: prop.content
+        })
+        //With this listener, we are showing the content in map
+        marker.addListener('click', function () {
+            informaton.open(map, marker)
+        })
+    }
+
+
+}
+
