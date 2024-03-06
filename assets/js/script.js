@@ -12,16 +12,30 @@ document.querySelector('#getLocation').addEventListener('click', () => {
 });
 
 
+let map;
+
 function initMap() {
     const options = {
         zoom: 16,
-        center: { lat: 27.676310 , lng: 85.398966 }
+        center: {lat: 27.686461, lng: 85.360379},
     }
 
-    let map = new google.maps.Map(
+    map = new google.maps.Map(
         document.getElementById('map'),
         options
     )
+
+    let marker = new google.maps.Marker({
+        position: {lat: 27.676214, lng: 85.398917},
+        map:map,
+        icon: 'https://img.icons8.com/fluent/48/000000/marker-storm.png'
+    })
+
+    let marker2 = new google.maps.Marker({
+        position: {lat: 27.676260, lng: 85.398964},
+        map:map,
+        icon: 'https://img.icons8.com/fluent/48/000000/marker-storm.png'
+    })
 }
 
 initMap();
