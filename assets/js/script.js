@@ -57,6 +57,9 @@ function initMap() {
         addMarker({ coordinates: event.latLng })
     })
 
+    //Direction
+    //drawDirection()
+
     // addMarker(
     //     {
     //         coordinates: {lat: 27.675342, lng: 85.397440},
@@ -100,3 +103,29 @@ function addMarker(prop) {
 
 }
 
+// function drawDirection() {
+//     const directionService = new google.maps.DirectionsService();
+//     const directionRenderer = new google.maps.DirectionsRenderer();
+
+//     directionRenderer.setMap(map)
+
+//     calculationAndDisplayRoute(directionService, directionRenderer)
+
+// }
+
+// function calculationAndDisplayRoute(directionService, directionRenderer) {
+//     const start = { lat: 27.676258, lng: 85.398997 }
+//     const end = {  lat: 27.675342, lng: 85.397440 }
+//     const request = {
+//         origin: start,
+//         destination: end,
+//         travelMode: google.maps.DirectionsTravelMode.DRIVING
+//     }
+
+//     directionService.route(request, function (response, status) {
+//        if( status === google.maps.DirectionsStatus.OK ) {
+//            directionRenderer.setDirections(response)
+//        }
+//     });
+
+// }
